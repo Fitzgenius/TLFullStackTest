@@ -1,0 +1,16 @@
+# Everything here was snaffled from `tripme-backend` in
+# `public/.htaccess`.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If the requested filename exists, simply serve it.
+    # We only want to let Apache serve files and not directories.
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule .? - [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+     # see https://stackoverflow.com/a/4038194
+    RewriteCond %{REQUEST_URI} !\.(jpg|jpeg|png|css|js|php)$
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
