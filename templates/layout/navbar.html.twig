@@ -1,0 +1,18 @@
+<nav id="sidebar">
+    <div class="inner">
+        <div class="dashboard-links">
+            <ul>
+            {% for link in nav_links %}
+                <li class="icon-{{link.icon}}{% if app.request.getRequestUri() starts with link.href %} active{% endif %}"><a href="{{ link.href }}">{{ link.label }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="account-links">
+            <ul>
+            {% for link in account_links %}
+                <li class="icon-{{link.icon}}{% if app.request.getRequestUri() starts with link.href %} active{% endif %}"><a href="{{ link.href }}">{{ link.label }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>

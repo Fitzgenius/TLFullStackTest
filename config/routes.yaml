@@ -1,8 +1,14 @@
 home:
     path: /
     controller: App\Controller\DefaultController::index
-bookings_list:
+dashboard:
+    path: /dashboard
+    controller: App\Controller\DefaultController::index
+bookings_page:
     path: /bookings
+    controller: App\Controller\BookingController::index
+bookings_list:
+    path: /bookings/list
     controller: App\Controller\BookingController::list
     methods: [GET]
 bookings_update_status:

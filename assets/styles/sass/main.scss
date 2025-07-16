@@ -1,3 +1,27 @@
-body {
-  background-color: blue;
+
+@import url("./navbar.scss");
+
+* {
+  font-family: Mulish!important;
+}
+
+.wrapper {
+    align-items: stretch;
+    display: flex;
+    width: 100%;
+}
+
+.main {
+    background: #f5f7fb;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 0;
+    overflow: hidden;
+    transition: margin-left 0.35s ease-in-out, left 0.35s ease-in-out,
+        margin-right 0.35s ease-in-out, right 0.35s ease-in-out;
+    width: 100%;
+    padding:  100px 80px;
 }

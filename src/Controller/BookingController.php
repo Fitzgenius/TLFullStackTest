@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,6 +46,14 @@ class BookingController extends AbstractController
             "booking_status" => "cancelled"
         ],
     ];
+
+    #[Route('/', name: 'bookings')]
+    public function index(): Response
+    {
+        return $this->render('booking/index.html.twig', [
+            'controller_name' => 'BookingController',
+        ]);
+    }
 
     #[Route('', methods: ['GET'])]
     public function list(): JsonResponse

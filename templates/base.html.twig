@@ -4,7 +4,11 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Reddit+Mono:wght@200..900&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -14,6 +18,26 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="wrapper">
+        {% include 'layout/navbar.html.twig' with {
+            nav_links: [
+                {'label': 'Dashboard', 'href': '/dashboard', 'icon': 'dashboard'},
+                {'label': 'Requests', 'href': '/requests', 'icon': 'requests'},
+                {'label': 'Bookings', 'href': '/bookings', 'icon': 'bookings'},
+                {'label': 'Trip Ideas', 'href': '/trip-ideas', 'icon': 'tripideas'},
+                {'label': 'Reviews', 'href': '/reviews', 'icon': 'reviews'},
+                {'label': 'Templates', 'href': '/templates', 'icon': 'templates'},
+            ],
+            account_links: [
+                {'label': 'Account', 'href': '/account', 'icon': 'account'},
+                {'label': 'Notifications', 'href': '/notifications', 'icon': 'notif'},
+                {'label': 'Help', 'href': '/help', 'icon': 'help'},
+                {'label': 'Log out', 'href': '/logout', 'icon': 'logout'},
+            ]
+        } %}
+            <div class="main">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
     </body>
 </html>
