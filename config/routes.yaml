@@ -1,6 +1,14 @@
 home:
     path: /
     controller: App\Controller\DefaultController::index
+bookings_list:
+    path: /bookings
+    controller: App\Controller\BookingController::list
+    methods: [GET]
+bookings_update_status:
+    path: /bookings/{id}/status
+    controller: App\Controller\BookingController::updateStatus
+    methods: [POST]
 demo:
     path: /lucky/number
     controller: App\Controller\ExampleController::index
