@@ -19,25 +19,28 @@
     </head>
     <body>
         <div class="wrapper">
-        {% include 'layout/navbar.html.twig' with {
-            nav_links: [
-                {'label': 'Dashboard', 'href': '/dashboard', 'icon': 'dashboard'},
-                {'label': 'Requests', 'href': '/requests', 'icon': 'requests'},
-                {'label': 'Bookings', 'href': '/bookings', 'icon': 'bookings'},
-                {'label': 'Trip Ideas', 'href': '/trip-ideas', 'icon': 'tripideas'},
-                {'label': 'Reviews', 'href': '/reviews', 'icon': 'reviews'},
-                {'label': 'Templates', 'href': '/templates', 'icon': 'templates'},
-            ],
-            account_links: [
-                {'label': 'Account', 'href': '/account', 'icon': 'account'},
-                {'label': 'Notifications', 'href': '/notifications', 'icon': 'notif'},
-                {'label': 'Help', 'href': '/help', 'icon': 'help'},
-                {'label': 'Log out', 'href': '/logout', 'icon': 'logout'},
-            ]
-        } %}
-            <div class="main">
-                {% block body %}{% endblock %}
+            <div class="mobile-utils">
+                
             </div>
+            {% include 'layout/navbar.html.twig' with {
+                nav_links: [
+                    {'label': 'Dashboard', 'href': '/dashboard', 'icon': 'dashboard'},
+                    {'label': 'Requests', 'href': '/requests', 'icon': 'requests'},
+                    {'label': 'Bookings', 'href': '/bookings', 'icon': 'bookings'},
+                    {'label': 'Trip Ideas', 'href': '/trip-ideas', 'icon': 'tripideas'},
+                    {'label': 'Reviews', 'href': '/reviews', 'icon': 'reviews'},
+                    {'label': 'Templates', 'href': '/templates', 'icon': 'templates'},
+                ],
+                account_links: [
+                    {'label': 'Account', 'href': '/account', 'icon': 'account'},
+                    {'label': 'Notifications', 'href': '/notifications', 'icon': 'notif'},
+                    {'label': 'Help', 'href': '/help', 'icon': 'help'},
+                    {'label': 'Log out', 'href': '/logout', 'icon': 'logout'},
+                ]
+            } %}
+            <main class="main">
+                {% block body %}{% endblock %}
+            </main>
         </div>
     </body>
 </html>

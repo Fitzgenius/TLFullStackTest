@@ -1,20 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BookingController!{% endblock %}
+{% block title %}TravelLocal - Boookings!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div id="bookings">
+    <h1>Bookings</h1>
+    <div class="filters">
+        <ul>
+            <li><a href="/bookings/" class="{{ selected_filter is not defined or selected_filter is empty ? 'active' : '' }}">All</a></li>
+        {% for key, label in available_filters %}
+            <li>
+                <a href="/bookings?market={{ key }}" class="{{ key == selected_filter ? 'active' : '' }}">
+                    {{ label }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="bookings-list">
+        <div class="booking-grid">
+        <!-- Table headers (visually only shown on desktop) -->
+        <div class="booking-row booking-header">
+            {% for header in table_headers %}
+            <div class="booking-cell">{{ header }}</div>
+            {% endfor %}
+        </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/project/src/Controller/BookingController.php'|file_link(0) }}">src/Controller/BookingController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/project/templates/booking/index.html.twig'|file_link(0) }}">templates/booking/index.html.twig</a></code></li>
-    </ul>
+        <!-- Data rows -->
+        {% for booking in bookings %}
+            <div class="booking-row">
+            {% for key, header in table_headers %}
+                <div class="booking-cell" data-label="{{ header }}">
+                    {% set value = attribute(booking, key) %}
+                    {% if key in ['trip_date', 'date'] %}
+                        {{ value|date('Y-m-d') }}
+                    {% elseif key == 'booking_status' %}
+                        <button data-booking-id="{{ booking.id }}" class="status-update-btn status state-{{ value is not defined or value is empty ? 'pending' : value }}">
+                            {% if value is not defined or value is empty %}
+                                Click to add status
+                            {% else %}
+                                {{ value|capitalize }}
+                            {% endif %}
+                        </button>
+                        <div class="booking-ui-dropdown" data-booking-id="{{ booking.id }}" >
+                            <ul>
+                                <li><button data-status="pending">Pending</button></li>
+                                <li><button data-status="confirmed">Confirmed booking</button></li>
+                                <li><button data-status="cancelled">Cancelled</button></li>
+                            </ul>
+                        </div>
+                    {% elseif key == 'payment_status' %}
+                        {{ value|capitalize }}
+                    {% elseif key == 'people' %}
+                        x {{ value }}
+                    {% elseif key in ['total_paid', 'total_price'] %}
+                        {{ booking.currency }} {{ value }}
+                    {% else %}
+                        {{ value }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}

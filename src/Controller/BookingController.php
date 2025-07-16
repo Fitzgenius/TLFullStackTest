@@ -21,10 +21,12 @@ class BookingController extends AbstractController
             "total_paid" => 6730,
             "total_price" => 10000,
             "payment_status" => "partial",
-            "booking_status" => null
+            "booking_status" => null,
+            "market" => "usa",
+            "currency" => "USD"
         ],
         2 => [
-            "id" => 1,
+            "id" => 2,
             "date" => 1752679974,
             "client_name" => "Tina Fey",
             "people" => 2,
@@ -32,10 +34,12 @@ class BookingController extends AbstractController
             "total_paid" => 6730,
             "total_price" => 10000,
             "payment_status" => "partial",
-            "booking_status" => "confirmed"
+            "booking_status" => "confirmed",
+            "market" => "dutch",
+            "currency" => "EUR"
         ],
         3 => [
-            "id" => 1,
+            "id" => 3,
             "date" => 1752679974,
             "client_name" => "Jackson Lamb",
             "people" => 2,
@@ -43,22 +47,53 @@ class BookingController extends AbstractController
             "total_paid" => 6730,
             "total_price" => 10000,
             "payment_status" => "partial",
-            "booking_status" => "cancelled"
+            "booking_status" => "cancelled",
+            "market" => "uk",
+            "currency" => "GBP"
         ],
     ];
 
     #[Route('/', name: 'bookings')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $selectedFilter = $request->query->get('market');
+
         return $this->render('booking/index.html.twig', [
-            'controller_name' => 'BookingController',
+            'available_filters' => [
+                "usa" => "USA Market",
+                "uk" => "UK Market",
+                "dutch" => "Dutch Market"
+            ],
+            'table_headers' => [
+                "id" => "Number",
+                "date" => "Booking date",
+                "client_name" => "Client name",
+                "people"=> "People",
+                "trip_date" => "Trip date",
+                "total_paid" => "Paid",
+                "total_price" => "Total price",
+                "payment_status" => "Payment status",
+                "booking_status" => "Booking status",
+            ],
+            'selected_filter' => $selectedFilter,
+            'bookings' => array_values($this->bookings)
         ]);
     }
 
     #[Route('', methods: ['GET'])]
-    public function list(): JsonResponse
+    public function list(Request $request): JsonResponse
     {
-        return $this->json(array_values($this->bookings));
+        $filter = $request->query->get('market');
+
+        $filteredBookings = array_filter($this->bookings, function ($booking) use ($filter) {
+            if (!$filter) {
+                return true; 
+            }
+
+            return $booking['market'] === $filter;
+        });
+
+        return $this->json(array_values($filteredBookings));
     }
 
     #[Route('/{id}/status', methods: ['POST'])]
@@ -71,7 +106,7 @@ class BookingController extends AbstractController
             return $this->json(['error' => 'Booking not found'], 404);
         }
 
-        if (!in_array($newStatus, ['confirmed', 'cancelled'], true)) {
+        if (!in_array($newStatus, ['confirmed', 'cancelled', 'pending'], true)) {
             return $this->json(['error' => 'Invalid status'], 400);
         }
 
@@ -83,4 +118,11 @@ class BookingController extends AbstractController
             'booking' => $this->bookings[$id]
         ]);
     }
+
+    // Move the code from list() to something like this
+    // enable multiple query var filters
+    public function filterBookings(array $bookings) {
+        // return some formatted version of $this->bookings
+    }
+
 }

@@ -1,3 +1,4 @@
+
 <nav id="sidebar">
     <div class="inner">
         <div class="dashboard-links">
@@ -8,6 +9,10 @@
             </ul>
         </div>
         <div class="account-links">
+            <div class="user-profile">
+                <img src="{{ asset('build/images/less-serious-avatar.jpg') }}" alt="Doge">
+                <span>Paula G</span>
+            </div>
             <ul>
             {% for link in account_links %}
                 <li class="icon-{{link.icon}}{% if app.request.getRequestUri() starts with link.href %} active{% endif %}"><a href="{{ link.href }}">{{ link.label }}</a></li>

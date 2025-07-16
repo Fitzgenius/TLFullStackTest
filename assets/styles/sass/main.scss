@@ -1,9 +1,12 @@
 
 @import url("./navbar.scss");
+@import url("./bookings.scss");
+
 
 * {
   font-family: Mulish!important;
 }
+
 
 .wrapper {
     align-items: stretch;
@@ -12,7 +15,7 @@
 }
 
 .main {
-    background: #f5f7fb;
+    background-color: #f4f6ef;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     display: flex;
@@ -24,4 +27,14 @@
         margin-right 0.35s ease-in-out, right 0.35s ease-in-out;
     width: 100%;
     padding:  100px 80px;
+    @media (min-width: 1px) and (max-width: 991.98px) {
+      padding: 40px 30px;
+    }
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #13294B;
+  margin-bottom: 45px;
 }

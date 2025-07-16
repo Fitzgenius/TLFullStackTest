@@ -45,8 +45,21 @@
                 }
             }
         }
-        .dashboard-links {
-
+        .account-links {
+            .user-profile {
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px;
+                gap: 12px;
+                span {
+                    font-size: 18px;
+                }
+                img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+            }
         }
     }
 }

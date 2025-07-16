@@ -1,0 +1,150 @@
+#bookings {
+    .filters {
+        ul {
+            display: flex;
+            gap: 5px;
+            padding: 0;
+            list-style: none;
+            margin-bottom: 25px;
+            > li {
+                a {
+                    text-decoration: none;
+                    display: block;
+                    color: #475d76;
+                    font-size: 14px;
+                    padding: 6px 16px;
+                    border-radius: 100px;
+                    align-content: center;
+                    &.active {
+                        color: #fff;
+                        background-color: #13294b;
+                        font-weight: bold;
+                    }
+                    &:hover {
+                        background-color: #e9eef6;
+                    }
+                }
+            }
+        }
+    }
+    .bookings-list {
+        .booking-grid {
+            display: grid;
+        }
+
+        .booking-row {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            background-color: #fff;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #13294b;
+        }
+
+        .booking-cell {
+            padding: 8px 12px;
+            position: relative;
+            .booking-ui-dropdown {
+                position: absolute;
+                display: none;
+                z-index: 10;
+                background: #fff;
+                border-radius: 12px;
+                padding: 12px;
+                box-shadow: 0px 2px 30px 0px #0000001A;
+                width: 176px;
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    > li {
+                        margin-bottom: 5px;
+                        > button {
+                            font-size: 16px;
+                            color: #13294B;
+                        }
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+                &.visible {
+                    display: block;
+                }
+                button {
+                    background: transparent;
+                    border: 0;
+                }
+            }
+            > button {
+                border: 0;
+                font-size: 12px;
+                color: #13294b;
+                display: block;
+                border-radius: 8px;
+                padding: 8px;
+                width: 100%;
+                &.state-cancelled {
+                    background-color: #fdabab;
+                }
+                &.state-pending {
+                    background-color: #f4f6ef;
+                }
+                &.state-confirmed {
+                    background-color: #bff29d;
+                }
+                @media (min-width: 1px) and (max-width: 991.98px) {
+                    margin-top: 20px;
+                    font-size: 16px;
+                }
+            }
+        }
+
+        /* Header styling */
+        .booking-header {
+            font-size: 12px;
+            color: #475d76;
+            background-color: transparent;
+        }
+
+        /* Responsive tweaks */
+        @media (min-width: 1px) and (max-width: 991.98px) {
+            .booking-header {
+                display: none;
+            }
+
+            .booking-row {
+                grid-template-columns: 1fr;
+                border: 1px solid #ddd;
+                padding: 0.5rem;
+            }
+
+            .booking-cell {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.4rem 0;
+                border: none;
+                border-bottom: 1px solid #eee;
+                flex-wrap: wrap;
+                &:last-child {
+                    border-bottom: 0;
+                }
+            }
+
+            .booking-cell::before {
+                content: attr(data-label);
+                font-weight: bold;
+                margin-right: 1rem;
+                flex: 1;
+                color: #666;
+            }
+
+            .booking-cell {
+                flex: 2;
+            }
+        }
+    }
+}
