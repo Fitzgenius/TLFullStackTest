@@ -5,19 +5,35 @@
 {% block body %}
 <div id="bookings">
     <h1>Bookings</h1>
+
+    {# This needs reworking to work with the web component #}
     <div class="filters">
         <ul>
             <li><a href="/bookings/" class="{{ selected_filter is not defined or selected_filter is empty ? 'active' : '' }}">All</a></li>
-        {% for key, label in available_filters %}
-            <li>
-                <a href="/bookings?market={{ key }}" class="{{ key == selected_filter ? 'active' : '' }}">
-                    {{ label }}
-                </a>
-            </li>
-        {% endfor %}
+            {% for key, label in available_filters %}
+                <li>
+                    <a href="/bookings?market={{ key }}" class="{{ key == selected_filter ? 'active' : '' }}">
+                        {{ label }}
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
-    <div class="bookings-list">
+    <booking-list>
+        <div class="bookings-list">
+            <div class="booking-grid" id="booking-grid">
+                <div class="booking-row booking-header">
+                    {% for header in table_headers %}
+                    <div class="booking-cell">{{ header }}</div>
+                    {% endfor %}
+                </div>
+                <div id="booking-row"></div>
+            </div>
+        </div>
+    </booking-list>
+
+    {# php/twig version of bookings}
+    {# <div class="bookings-list">
         <div class="booking-grid">
         <!-- Table headers (visually only shown on desktop) -->
         <div class="booking-row booking-header">
@@ -63,6 +79,6 @@
             </div>
         {% endfor %}
         </div>
-    </div>
+    </div> #}
 </div>
 {% endblock %}

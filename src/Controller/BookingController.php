@@ -12,7 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BookingController extends AbstractController
 {
     private array $bookings = [
-        1 => [
+        1 =>
+        [
             "id" => 1,
             "date" => 1752679974,
             "client_name" => "Sarah Scott",
@@ -25,7 +26,8 @@ class BookingController extends AbstractController
             "market" => "usa",
             "currency" => "USD"
         ],
-        2 => [
+        2 => 
+        [
             "id" => 2,
             "date" => 1752679974,
             "client_name" => "Tina Fey",
@@ -38,7 +40,8 @@ class BookingController extends AbstractController
             "market" => "dutch",
             "currency" => "EUR"
         ],
-        3 => [
+        3 =>
+        [
             "id" => 3,
             "date" => 1752679974,
             "client_name" => "Jackson Lamb",
