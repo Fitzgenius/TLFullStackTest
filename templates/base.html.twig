@@ -20,7 +20,9 @@
     <body>
         <div class="wrapper">
             <div class="mobile-utils">
-                
+                <button aria-label="Open sidebar menu">
+                    Menu
+                </button>   
             </div>
             {% include 'layout/navbar.html.twig' with {
                 nav_links: [
@@ -38,7 +40,7 @@
                     {'label': 'Log out', 'href': '/logout', 'icon': 'logout'},
                 ]
             } %}
-            <main class="main">
+            <main class="main" role="main">
                 {% block body %}{% endblock %}
             </main>
         </div>

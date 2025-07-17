@@ -9,6 +9,9 @@
         margin-left: -278px;
         &.collapsed {
             margin-left: 0;
+            position: absolute;
+            z-index: 10;
+            height: 100%;
         }
     }
 

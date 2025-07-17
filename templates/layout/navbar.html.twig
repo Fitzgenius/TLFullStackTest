@@ -1,10 +1,12 @@
 
-<nav id="sidebar">
+<nav id="sidebar" role="navigation" aria-label="Main navigation">
     <div class="inner">
         <div class="dashboard-links">
             <ul>
             {% for link in nav_links %}
-                <li class="icon-{{link.icon}}{% if app.request.getRequestUri() starts with link.href %} active{% endif %}"><a href="{{ link.href }}">{{ link.label }}</a></li>
+                <li class="icon-{{link.icon}}{% if app.request.getRequestUri() starts with link.href %} active{% endif %}">
+                    <a {% if app.request.getRequestUri() starts with link.href %}aria-current="page"{% endif %} href="{{ link.href }}">{{ link.label }}</a>
+                </li>
             {% endfor %}
             </ul>
         </div>
@@ -15,7 +17,9 @@
             </div>
             <ul>
             {% for link in account_links %}
-                <li class="icon-{{link.icon}}{% if app.request.getRequestUri() starts with link.href %} active{% endif %}"><a href="{{ link.href }}">{{ link.label }}</a></li>
+                <li class="icon-{{link.icon}}{% if app.request.getRequestUri() starts with link.href %} active{% endif %}">
+                    <a {% if app.request.getRequestUri() starts with link.href %}aria-current="page"{% endif %} href="{{ link.href }}">{{ link.label }}</a>
+                </li>
             {% endfor %}
             </ul>
         </div>
